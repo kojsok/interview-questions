@@ -54,3 +54,27 @@ const operations = [
 function sortOperations(operations) {
   // Ваша реализация здесь
 }
+
+//============решение========================
+function sortOperations(operations) {
+  const result = {};
+  const sortedOperations = [...operations].sort((a, b) => {
+      const timestampA = new Date(a.date).getTime();
+      const timestampB = new Date(b.date).getTime();
+      
+      return timestampA - timestampB;
+  });
+  
+  for(const operation of sortedOperations) {
+      const [year, month, day] = operation.date.split('-');
+      
+      if(!(year in result)) {
+          result[year] = [];
+      }
+      
+      result[year].push(`${month}-${day}`);
+  }
+  
+  return result;
+}
+
